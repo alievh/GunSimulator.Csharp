@@ -1,0 +1,12 @@
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\Indexer\bin\Debug\net5.0\Indexer.deps.json
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\Indexer\bin\Debug\net5.0\Indexer.dll
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\Indexer\bin\Debug\net5.0\Indexer.pdb
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\Indexer\obj\Debug\net5.0\Indexer.csproj.AssemblyReference.cache
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\Indexer\obj\Debug\net5.0\Indexer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\Indexer\obj\Debug\net5.0\Indexer.AssemblyInfoInputs.cache
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\Indexer\obj\Debug\net5.0\Indexer.AssemblyInfo.cs
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\Indexer\obj\Debug\net5.0\Indexer.csproj.CoreCompileInputs.cache
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\Indexer\obj\Debug\net5.0\Indexer.dll
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\Indexer\obj\Debug\net5.0\refint\Indexer.dll
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\Indexer\obj\Debug\net5.0\Indexer.pdb
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\Indexer\obj\Debug\net5.0\ref\Indexer.dll
