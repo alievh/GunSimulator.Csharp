@@ -9,6 +9,7 @@ namespace GunSimulator.Models
     public class Guns : Base
     {
         private int _capacity;
+        private static int _currentBulletCount;
 
         public int Capacity 
         { 
@@ -25,7 +26,22 @@ namespace GunSimulator.Models
                 _capacity = value;
             }
         }
-        public int CurrentBulletCount { get; set; }
+        public int CurrentBulletCount 
+        {
+            get
+            {
+                return _currentBulletCount;
+            }
+            set
+            {
+                _currentBulletCount = value;
+            }
+        }
+
+        static Guns()
+        {
+            _currentBulletCount = 25;
+        }
 
         public Guns()
         {
@@ -45,6 +61,11 @@ namespace GunSimulator.Models
         public override string FullInfo()
         {
             return $"Id: {Id} - Name: {Name}, Ammo Capacity: {Capacity}";
+        }
+
+        public void Reload()
+        {
+            CurrentBulletCount = Capacity;
         }
     }
 }

@@ -12,5 +12,31 @@ namespace GunSimulator.Models
         public Pistol(string name, int capacity) : base(name, capacity)
         {
         }
+
+        public void ReduceBurstAmmo()
+        {
+            if (CurrentBulletCount - 3 > 0)
+            {
+                CurrentBulletCount -= 3;
+                Console.WriteLine($"Ammo Count: {CurrentBulletCount}/{Capacity}");
+            }
+            else
+            {
+                Console.WriteLine("-You don't have enough ammo press 'R' for reload-");
+            }
+        }
+
+        public void ReduceSingleAmmo()
+        {
+            if (CurrentBulletCount > 0)
+            {
+                CurrentBulletCount -= 1;
+                Console.WriteLine($"Ammo Count: {CurrentBulletCount}/{Capacity}");
+            }
+            else
+            {
+                Console.WriteLine("-You don't have enough ammo press 'R' for reload-");
+            }
+        }
     }
 }

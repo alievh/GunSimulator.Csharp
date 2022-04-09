@@ -14,5 +14,44 @@ namespace GunSimulator.Models
         {
 
         }
+
+        public void ReduceAutoAmmo()
+        {
+            if (CurrentBulletCount > 0)
+            {
+                CurrentBulletCount = 0;
+                Console.WriteLine($"Ammo Count: {CurrentBulletCount}/{Capacity}");
+            }
+            else
+            {
+                Console.WriteLine("-You don't have enough ammo press 'R' for reload-");
+            }
+        }
+
+        public void ReduceBurstAmmo()
+        {
+            if (CurrentBulletCount - 3 > 0)
+            {
+                CurrentBulletCount -= 3;
+                Console.WriteLine($"Ammo Count: {CurrentBulletCount}/{Capacity}");
+            }
+            else
+            {
+                Console.WriteLine("-You don't have enough ammo press 'R' for reload-");
+            }
+        }
+
+        public void ReduceSingleAmmo()
+        {
+            if (CurrentBulletCount > 0)
+            {
+                CurrentBulletCount -= 1;
+                Console.WriteLine($"Ammo Count: {CurrentBulletCount}/{Capacity}");
+            }
+            else
+            {
+                Console.WriteLine("-You don't have enough ammo press 'R' for reload-");
+            }
+        }
     }
 }

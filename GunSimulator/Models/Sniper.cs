@@ -12,5 +12,18 @@ namespace GunSimulator.Models
         public Sniper(string name, int capacity) : base(name, capacity)
         {
         }
+
+        public void ReduceSingleAmmo()
+        {
+            if (CurrentBulletCount > 0)
+            {
+                CurrentBulletCount -= 1;
+                Console.WriteLine($"Ammo Count: {CurrentBulletCount}/{Capacity}");
+            }
+            else
+            {
+                Console.WriteLine("-You don't have enough ammo press 'R' for reload-");
+            }
+        }
     }
 }

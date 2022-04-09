@@ -8,10 +8,16 @@
     ".NETCoreApp,Version=v5.0": {
       "GunSimulator/1.0.0": {
         "dependencies": {
+          "Exceptions": "1.0.0",
           "Indexer": "1.0.0"
         },
         "runtime": {
           "GunSimulator.dll": {}
+        }
+      },
+      "Exceptions/1.0.0": {
+        "runtime": {
+          "Exceptions.dll": {}
         }
       },
       "Indexer/1.0.0": {
@@ -23,6 +29,11 @@
   },
   "libraries": {
     "GunSimulator/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Exceptions/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

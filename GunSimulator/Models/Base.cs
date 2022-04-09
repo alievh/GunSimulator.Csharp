@@ -12,7 +12,7 @@ namespace GunSimulator.Models
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public bool isDeleted { get; set; }
+        public bool IsDeleted { get; set; }
         public DateTime CreateTime { get; set; }
 
         static Base()
@@ -28,7 +28,7 @@ namespace GunSimulator.Models
         public Base(string name) : this()
         {
             Name = name;
-            isDeleted = false;
+            IsDeleted = false;
     }
 
         public abstract string FullInfo();

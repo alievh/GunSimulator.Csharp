@@ -8,5 +8,6 @@ namespace GunSimulator.Interfaces
 {
     public interface IAutoShot
     {
+        public void ReduceAutoAmmo();
     }
 }

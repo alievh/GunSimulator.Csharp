@@ -17,3 +17,5 @@ C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\GunSimulator\obj\Debug\net5.0\r
 C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\GunSimulator\obj\Debug\net5.0\GunSimulator.pdb
 C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\GunSimulator\obj\Debug\net5.0\GunSimulator.genruntimeconfig.cache
 C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\GunSimulator\obj\Debug\net5.0\ref\GunSimulator.dll
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\GunSimulator\bin\Debug\net5.0\Exceptions.dll
+C:\Users\hsyna\Desktop\GunSimulator\GunSimulator\GunSimulator\bin\Debug\net5.0\Exceptions.pdb

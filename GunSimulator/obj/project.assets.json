@@ -2,6 +2,16 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "Exceptions/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Exceptions.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Exceptions.dll": {}
+        }
+      },
       "Indexer/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -15,6 +25,11 @@
     }
   },
   "libraries": {
+    "Exceptions/1.0.0": {
+      "type": "project",
+      "path": "../Exceptions/Exceptions.csproj",
+      "msbuildProject": "../Exceptions/Exceptions.csproj"
+    },
     "Indexer/1.0.0": {
       "type": "project",
       "path": "../Indexer/Indexer.csproj",
@@ -23,6 +38,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Exceptions >= 1.0.0",
       "Indexer >= 1.0.0"
     ]
   },
@@ -53,6 +69,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
+            "C:\\Users\\hsyna\\Desktop\\GunSimulator\\GunSimulator\\Exceptions\\Exceptions.csproj": {
+              "projectPath": "C:\\Users\\hsyna\\Desktop\\GunSimulator\\GunSimulator\\Exceptions\\Exceptions.csproj"
+            },
             "C:\\Users\\hsyna\\Desktop\\GunSimulator\\GunSimulator\\Indexer\\Indexer.csproj": {
               "projectPath": "C:\\Users\\hsyna\\Desktop\\GunSimulator\\GunSimulator\\Indexer\\Indexer.csproj"
             }
