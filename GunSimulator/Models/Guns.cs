@@ -8,8 +8,23 @@ namespace GunSimulator.Models
 {
     public class Guns : Base
     {
+        private int _capacity;
 
-        public int Capacity { get; set; }
+        public int Capacity 
+        { 
+            get
+            {
+                return _capacity;
+            } 
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new IndexOutOfRangeException();
+                }
+                _capacity = value;
+            }
+        }
         public int CurrentBulletCount { get; set; }
 
         public Guns()
@@ -19,7 +34,7 @@ namespace GunSimulator.Models
 
         public Guns(string name, int capacity) : base(name)
         {
-
+            Capacity = capacity;
         }
 
         public override string Info()
@@ -29,7 +44,7 @@ namespace GunSimulator.Models
 
         public override string FullInfo()
         {
-            return $"Id: {Id} - Name: {Name}, ";
+            return $"Id: {Id} - Name: {Name}, Ammo Capacity: {Capacity}";
         }
     }
 }

@@ -28,7 +28,8 @@ namespace GunSimulator.Models
         public Base(string name) : this()
         {
             Name = name;
-        }
+            isDeleted = false;
+    }
 
         public abstract string FullInfo();
         public abstract string Info();

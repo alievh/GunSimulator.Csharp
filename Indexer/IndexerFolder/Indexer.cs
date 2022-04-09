@@ -103,17 +103,5 @@ namespace Indexer.IndexerFolder
             return newArray;
 
         }
-
-        /// <summary>
-        /// Using for print all user to Console
-        /// </summary>
-        public void Peek()
-        {
-            for (int i = 0; i < _array.Length; i++)
-            {
-                Console.WriteLine(_array[i]);
-            }
-        }
-
     }
 }

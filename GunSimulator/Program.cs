@@ -8,29 +8,50 @@ namespace GunSimulator
     {
         static void Main(string[] args)
         {
-            //AssaultRifle ak47 = new AssaultRifle("ak-47", 30);
-            //AssaultRifle ak48 = new AssaultRifle("ak-48", 30);
-            //Sniper awp = new Sniper("Awp", 5);
-            //Pistol deserteagle = new Pistol("DesertEagle", 7);
 
-            //Indexer<Guns> guns = new Indexer<Guns>();
-            //Indexer<AssaultRifle> assaultRifles = new Indexer<AssaultRifle>();
-
-            //assaultRifles.Add(ak47);
-            //guns.Add(ak47);
-            //guns.Add(awp);
-            //guns.Add(deserteagle);
-            //for (int i = 0; i < guns.Length; i++)
-            //{
-            //    Console.WriteLine(guns[i].Info());
-            //}
             Menu();
         }
 
         public static void Menu()
         {
-            int useGunInput = 0;
-            int createGunInput = 0;
+            #region CreatedAssaultRifles
+            Indexer<AssaultRifle> assaultRifles = new Indexer<AssaultRifle>();
+
+            assaultRifles.Add(new AssaultRifle("Famas", 25));
+            assaultRifles.Add(new AssaultRifle("M4A4", 30));
+            assaultRifles.Add(new AssaultRifle("AK-47", 25));
+            assaultRifles.Add(new AssaultRifle("M4A1-S", 25));
+            assaultRifles.Add(new AssaultRifle("AUG", 30));
+            #endregion
+            #region CreatedPistols
+            Indexer<Pistol> pistols = new Indexer<Pistol>();
+
+            pistols.Add(new Pistol("Glock-18", 25));
+            pistols.Add(new Pistol("P250", 30));
+            pistols.Add(new Pistol("Five-Seven", 25));
+            pistols.Add(new Pistol("DesertEagle", 25));
+            pistols.Add(new Pistol("DualBarettas", 30));
+            #endregion
+            #region CreatedSmg
+            Indexer<Smg> smg = new Indexer<Smg>();
+
+            smg.Add(new Smg("MP7", 25));
+            smg.Add(new Smg("MP9", 30));
+            smg.Add(new Smg("UMP-45", 25));
+            smg.Add(new Smg("P90", 25));
+            smg.Add(new Smg("PP-Bizon", 30));
+            #endregion
+            #region CreatedSniper
+            Indexer<Sniper> sniper = new Indexer<Sniper>();
+
+            sniper.Add(new Sniper("AWP", 25));
+            sniper.Add(new Sniper("SSG 08", 30));
+            sniper.Add(new Sniper("SCAR-20", 25));
+            #endregion
+
+            int? useGunInput = null;
+            int? createGunInput = null;
+            int? removeGunInput = null;
 
             PrintPoster();
         START:
@@ -40,10 +61,10 @@ namespace GunSimulator
                               "Press 0 - Exit\n");
             Console.Write("Enter your answer: ");
             string menuIputString = Console.ReadLine();
-            int menuInpit;
+            int menuInput;
             try
             {
-                menuInpit = Convert.ToInt32(menuIputString);
+                menuInput = Convert.ToInt32(menuIputString);
             }
             catch (Exception)
             {
@@ -52,16 +73,266 @@ namespace GunSimulator
                 goto START;
             }
 
-            switch (menuInpit)
+            switch (menuInput)
             {
                 case 1:
-                    useGunInput = UseGunInput();
+                    useGunInput = UseCreateRemove("use");
+
+                    switch (useGunInput)
+                    {
+                        case 1:
+                            Console.Clear();
+                            for (int i = 0; i < assaultRifles.Length; i++)
+                            {
+                                Console.WriteLine(assaultRifles[i].FullInfo());
+                            }
+                            Console.WriteLine("\nPress 0 for Go Back");
+                            break;
+                        case 2:
+                            Console.Clear();
+                            for (int i = 0; i < pistols.Length; i++)
+                            {
+                                Console.WriteLine(pistols[i].FullInfo());
+                            }
+                            Console.WriteLine("\nPress 0 for Go Back");
+                            break;
+                        case 3:
+                            Console.Clear();
+                            for (int i = 0; i < smg.Length; i++)
+                            {
+                                Console.WriteLine(smg[i].FullInfo());
+                            }
+                            Console.WriteLine("\nPress 0 for Go Back");
+                            break;
+                        case 4:
+                            Console.Clear();
+                            for (int i = 0; i < sniper.Length; i++)
+                            {
+                                Console.WriteLine(sniper[i].FullInfo());
+                            }
+                            Console.WriteLine("\nPress 0 for Go Back");
+                            break;
+                        case 0:
+                            Console.Clear();
+                            goto START;
+                    }
                     break;
                 case 2:
-                    createGunInput = CreateGunInput();
+                    createGunInput = UseCreateRemove("create");
+
+                    switch (createGunInput)
+                    {
+                        case 1:
+                            string assaultName = gunsNameCreatedByUser();
+                            int assaultCapacity = gunsCapacityCreatedByUser();
+
+                            assaultRifles.Add(new AssaultRifle(assaultName, assaultCapacity));
+                            goto START;
+                        case 2:
+                            string pistolName = gunsNameCreatedByUser();
+                            int pistolCapacity = gunsCapacityCreatedByUser();
+
+                            pistols.Add(new Pistol(pistolName, pistolCapacity));
+                            goto START;
+                        case 3:
+                            string smgName = gunsNameCreatedByUser();
+                            int smgCapacity = gunsCapacityCreatedByUser();
+
+                            smg.Add(new Smg(smgName, smgCapacity));
+                            goto START;
+                        case 4:
+                            string sniperName = gunsNameCreatedByUser();
+                            int sniperCapacity = gunsCapacityCreatedByUser();
+
+                            sniper.Add(new Sniper(sniperName, sniperCapacity));
+                            goto START;
+                        case 0:
+                            Console.Clear();
+                            goto START;
+                    }
                     break;
                 case 3:
+                    removeGunInput = UseCreateRemove("remove");
 
+                    switch (removeGunInput)
+                    {
+                        case 1:
+                            Remove1:
+                            Console.Clear();
+                            for (int i = 0; i < assaultRifles.Length; i++)
+                            {
+                                Console.WriteLine(assaultRifles[i].FullInfo());
+                            }
+                            Console.WriteLine("\nPress 0 for Go Back");
+                            Console.Write("\nSelect ID which you want to delete: ");
+                            string assaultRemoveIdString = Console.ReadLine();
+                            int assaultRemoveId = 0;
+                            try
+                            {
+                                assaultRemoveId = Convert.ToInt32(assaultRemoveIdString);
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Invalid value!\n" +
+                                                  "Please try again!");
+                                goto Remove1;
+                            }
+                            int assaultLoopCount = 0;
+                            for (int i = 0; i < assaultRifles.Length; i++)
+                            {
+                                if (assaultRemoveId == assaultRifles[i].Id)
+                                {
+                                    assaultRifles.Remove(assaultRifles[assaultLoopCount]);
+                                    Console.WriteLine("Gun removed!");
+                                    goto START;
+                                    assaultLoopCount++;
+                                }
+                                
+                            }
+                            if (assaultRemoveId == 0)
+                            {
+                                goto START;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid ID!\n" +
+                                                  "Please try again!");
+                                goto Remove1;
+                            }
+                        case 2:
+                            Console.Clear();
+                            Remove2:
+                            for (int i = 0; i < pistols.Length; i++)
+                            {
+                                Console.WriteLine(pistols[i].FullInfo());
+                            }
+                            Console.WriteLine("\nPress 0 for Go Back");
+                            Console.Write("\nSelect ID which you want to delete: ");
+                            string pistolRemoveIdString = Console.ReadLine();
+                            int pistolRemoveId = 0;
+                            try
+                            {
+                                pistolRemoveId = Convert.ToInt32(pistolRemoveIdString);
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Invalid value!\n" +
+                                                  "Please try again!");
+                                goto Remove2;
+                            }
+                            int pistolLoopCount = 0;
+                            for (int i = 0; i < pistols.Length; i++)
+                            {
+                                if (pistolRemoveId == pistols[i].Id)
+                                {
+                                    pistols.Remove(pistols[pistolLoopCount]);
+                                    Console.WriteLine("Gun removed!");
+                                    goto START;
+                                }
+                                pistolLoopCount++;
+                                
+                            }
+                            if (pistolRemoveId == 0)
+                            {
+                                goto START;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid ID!\n" +
+                                                  "Please try again!");
+                                goto Remove2;
+                            }
+                                
+                        case 3:
+                            Console.Clear();
+                            Remove3:
+                            for (int i = 0; i < smg.Length; i++)
+                            {
+                                Console.WriteLine(smg[i].FullInfo());
+                            }
+                            Console.WriteLine("\nPress 0 for Go Back");
+                            Console.Write("\nSelect ID which you want to delete: ");
+                            string smgRemoveIdString = Console.ReadLine();
+                            int smgRemoveId = 0;
+                            try
+                            {
+                                smgRemoveId = Convert.ToInt32(smgRemoveIdString);
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Invalid value!\n" +
+                                                  "Please try again!");
+                                goto Remove3;
+                            }
+                            int smgLoopCount = 0;
+                            for (int i = 0; i < smg.Length; i++)
+                            {
+                                if (smgRemoveId == smg[i].Id)
+                                {
+                                    smg.Remove(smg[smgLoopCount]);
+                                    Console.WriteLine("Gun removed!");
+                                    goto START;
+                                    smgLoopCount++;
+                                }
+                            }
+                            if (smgRemoveId == 0)
+                            {
+                                goto START;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid ID!\n" +
+                                                  "Please try again!");
+                                goto Remove3;
+                            }
+                        case 4:
+                            Console.Clear();
+                            Remove4:
+                            for (int i = 0; i < sniper.Length; i++)
+                            {
+                                Console.WriteLine(sniper[i].FullInfo());
+                            }
+                            Console.WriteLine("\nPress 0 for Go Back");
+                            Console.Write("\nSelect ID which you want to delete: ");
+                            string sniperRemoveIdString = Console.ReadLine();
+                            int sniperRemoveId = 0;
+                            try
+                            {
+                                sniperRemoveId = Convert.ToInt32(sniperRemoveIdString);
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Invalid value!\n" +
+                                                  "Please try again!");
+                                goto Remove4;
+                            }
+                            int sniperLoopCount = 0;
+                            for (int i = 0; i < sniper.Length; i++)
+                            {
+                                if (sniperRemoveId == sniper[i].Id)
+                                {
+                                    sniper.Remove(sniper[sniperLoopCount]);
+                                    Console.WriteLine("Gun removed!");
+                                    goto START;
+                                }
+                                sniperLoopCount++;
+                            }
+                            if (sniperRemoveId == 0)
+                            {
+                                goto START;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid ID!\n" +
+                                                  "Please try again!");
+                                goto Remove4;
+                            }
+                        case 0:
+                            Console.Clear();
+                            goto START;
+                        default:
+                            break;
+                    }
                     break;
                 case 0:
                     Console.Clear();
@@ -89,39 +360,6 @@ namespace GunSimulator
 
             }
 
-            switch (useGunInput)
-            {
-                case 1:
-                    break;
-                case 2:
-                    
-                    break;
-                case 3:
-
-                    break;
-                case 4:
-                    break;
-                case 0:
-                    Console.Clear();
-                    goto START;
-            }
-
-            switch (createGunInput)
-            {
-                case 1:
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-
-                    break;
-                case 4:
-                    break;
-                case 0:
-                    Console.Clear();
-                    goto START;
-            }
 
         END:;
         }
@@ -142,16 +380,16 @@ namespace GunSimulator
             Console.WriteLine("1 - Assault Rifle\n" +
                               "2 - Pistol\n" +
                               "3 - SMG\n" +
-                              "4 - Assault Rifle\n" +
+                              "4 - Sniper\n" +
                               "0 - Go Back");
             Console.Write("Enter your answer: ");
         }
 
-        public static int UseGunInput()
+        public static int UseCreateRemove(string output)
         {
             Console.Clear();
         ERROR1:
-            Console.WriteLine("Which type gun will you use?");
+            Console.WriteLine($"Which type gun will you {output}?");
             PrintGunTypes();
             string inputString = Console.ReadLine();
             int input;
@@ -169,26 +407,34 @@ namespace GunSimulator
             return input;
         }
 
-        public static int CreateGunInput()
+        public static string gunsNameCreatedByUser()
         {
             Console.Clear();
-        ERROR2:
-            Console.WriteLine("Which type gun will you create?");
-            PrintGunTypes();
-            string inputString = Console.ReadLine();
-            int input;
+            Console.Write("Enter your gun name: ");
+            string gunNameCreatedByUser = Console.ReadLine();
+            return gunNameCreatedByUser;
+        }
+
+        public static int gunsCapacityCreatedByUser()
+        {
+        TryAgain4:
+            Console.Write("Enter weopan's capacity: ");
+            string gunCapacityCreatedByUserString = Console.ReadLine();
+            int gunCapacityCreatedByUser = 0;
+
             try
             {
-                input = Convert.ToInt32(inputString);
+                gunCapacityCreatedByUser = Convert.ToInt32(gunCapacityCreatedByUserString);
             }
             catch (Exception)
             {
-                Console.WriteLine("Invalid Input!\n" +
-                                  "Please Try Again!\n");
-                goto ERROR2;
+                Console.WriteLine("Invalid value!\n" +
+                                  "Please Try Again!");
+                goto TryAgain4;
             }
 
-            return input;
+            return gunCapacityCreatedByUser;
         }
-    }     
+
+    }
 }
