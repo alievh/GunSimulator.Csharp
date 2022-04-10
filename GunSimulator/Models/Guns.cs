@@ -61,13 +61,15 @@ namespace GunSimulator.Models
 
         public void Reload()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             CurrentBulletCount = Capacity;
-            Console.WriteLine("-Gun Reloaded! You can use your gun now -");
+            Console.WriteLine("<= Gun Reloaded! You can use your gun now =>");
         }
 
         public static void PrintSingleShooter()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(@"            ||||||||||||||
            =              \       ,
            =               |
@@ -90,6 +92,7 @@ namespace GunSimulator.Models
         public static void PrintBurstShooter()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(@"            ||||||||||||||
            =              \       ,
            =               |
@@ -112,6 +115,7 @@ namespace GunSimulator.Models
         public static void PrintAutoShooter()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(@"            ||||||||||||||
            =              \       ,
            =               |

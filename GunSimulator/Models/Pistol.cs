@@ -17,12 +17,15 @@ namespace GunSimulator.Models
         {
             if (CurrentBulletCount - 3 > 0)
             {
+                Console.Clear();
                 CurrentBulletCount -= 3;
+                PrintBurstShooter();
                 Console.WriteLine($"\nYour Gun: {Name} Ammo Count: {CurrentBulletCount}/{Capacity}");
             }
             else
             {
-                Console.WriteLine("-You don't have enough ammo press 'R' for reload-");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("<= You don't have enough ammo press 'R' for reload =>");
             }
         }
 
@@ -30,12 +33,15 @@ namespace GunSimulator.Models
         {
             if (CurrentBulletCount > 0)
             {
+                Console.Clear();
                 CurrentBulletCount -= 1;
+                PrintSingleShooter();
                 Console.WriteLine($"\nYour Gun: {Name} Ammo Count: {CurrentBulletCount}/{Capacity}");
             }
             else
             {
-                Console.WriteLine("-You don't have enough ammo press 'R' for reload-");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("<= You don't have enough ammo press 'R' for reload =>");
             }
         }
     }
