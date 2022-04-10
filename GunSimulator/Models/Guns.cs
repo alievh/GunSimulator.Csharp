@@ -9,7 +9,7 @@ namespace GunSimulator.Models
     public class Guns : Base
     {
         private int _capacity;
-        private static int _currentBulletCount;
+        private int _currentBulletCount;
 
         public int Capacity 
         { 
@@ -19,7 +19,7 @@ namespace GunSimulator.Models
             } 
             set
             {
-                if (value <= 0)
+                if (value <= 0 && value >= 200)
                 {
                     throw new IndexOutOfRangeException();
                 }
@@ -38,19 +38,15 @@ namespace GunSimulator.Models
             }
         }
 
-        static Guns()
-        {
-            _currentBulletCount = 25;
-        }
-
         public Guns()
         {
 
         }
 
-        public Guns(string name, int capacity) : base(name)
+        public Guns(string name, int capacity, int currentBullet) : base(name)
         {
             Capacity = capacity;
+            CurrentBulletCount = currentBullet;
         }
 
         public override string Info()
@@ -60,12 +56,79 @@ namespace GunSimulator.Models
 
         public override string FullInfo()
         {
-            return $"Id: {Id} - Name: {Name}, Ammo Capacity: {Capacity}";
+            return $"Id: {Id} - Name: {Name}, Ammo Capacity: {Capacity}, CreateTime: {CreateTime}";
         }
 
         public void Reload()
         {
             CurrentBulletCount = Capacity;
+            Console.WriteLine("-Gun Reloaded! You can use your gun now -");
+        }
+
+        public static void PrintSingleShooter()
+        {
+            Console.Clear();
+            Console.WriteLine(@"            ||||||||||||||
+           =              \       ,
+           =               |
+          _=            ___/
+         / _\           (o)\
+        | | \            _  \
+        | |/            (____)
+         \__/          /   |
+          /           /  ___)
+         /    \       \    _)                       )
+        \      \           /                       (
+      \/ \      \_________/   |\_________________,_ )
+       \/ \      /            |     ==== _______)__)       =>
+        \/ \    /           __/___  ====_/
+         \/ \  /           (O____)\\_(_/
+                          (O_ ____)
+                           (O____)");
+        }
+
+        public static void PrintBurstShooter()
+        {
+            Console.Clear();
+            Console.WriteLine(@"            ||||||||||||||
+           =              \       ,
+           =               |
+          _=            ___/
+         / _\           (o)\
+        | | \            _  \
+        | |/            (____)
+         \__/          /   |
+          /           /  ___)
+         /    \       \    _)                       )
+        \      \           /                       (
+      \/ \      \_________/   |\_________________,_ )           =>
+       \/ \      /            |     ==== _______)__)       =>        =>
+        \/ \    /           __/___  ====_/
+         \/ \  /           (O____)\\_(_/
+                          (O_ ____)
+                           (O____)");
+        }
+
+        public static void PrintAutoShooter()
+        {
+            Console.Clear();
+            Console.WriteLine(@"            ||||||||||||||
+           =              \       ,
+           =               |
+          _=            ___/
+         / _\           (o)\
+        | | \            _  \
+        | |/            (____)
+         \__/          /   |
+          /           /  ___)
+         /    \       \    _)                       )
+        \      \           /                       (
+      \/ \      \_________/   |\_________________,_ )           =>        =>
+       \/ \      /            |     ==== _______)__)       =>        =>
+        \/ \    /           __/___  ====_/
+         \/ \  /           (O____)\\_(_/
+                          (O_ ____)
+                           (O____)");
         }
     }
 }

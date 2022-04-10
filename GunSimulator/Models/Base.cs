@@ -23,6 +23,7 @@ namespace GunSimulator.Models
         public Base()
         {
             Id = ++_idCounter;
+            CreateTime = DateTime.Now;
         }
 
         public Base(string name) : this()

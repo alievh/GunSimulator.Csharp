@@ -17,36 +17,36 @@ namespace GunSimulator
             #region CreatedAssaultRifles
             Indexer<AssaultRifle> assaultRifles = new Indexer<AssaultRifle>();
 
-            assaultRifles.Add(new AssaultRifle("Famas", 25));
-            assaultRifles.Add(new AssaultRifle("M4A4", 30));
-            assaultRifles.Add(new AssaultRifle("AK-47", 25));
-            assaultRifles.Add(new AssaultRifle("M4A1-S", 25));
-            assaultRifles.Add(new AssaultRifle("AUG", 30));
+            assaultRifles.Add(new AssaultRifle("Famas", 25, 25));
+            assaultRifles.Add(new AssaultRifle("M4A4", 30, 30));
+            assaultRifles.Add(new AssaultRifle("AK-47", 30, 30));
+            assaultRifles.Add(new AssaultRifle("M4A1-S", 25, 25));
+            assaultRifles.Add(new AssaultRifle("AUG", 30, 30));
             #endregion
             #region CreatedPistols
             Indexer<Pistol> pistols = new Indexer<Pistol>();
 
-            pistols.Add(new Pistol("Glock-18", 25));
-            pistols.Add(new Pistol("P250", 30));
-            pistols.Add(new Pistol("Five-Seven", 25));
-            pistols.Add(new Pistol("DesertEagle", 25));
-            pistols.Add(new Pistol("DualBarettas", 30));
+            pistols.Add(new Pistol("Glock-18", 20, 20));
+            pistols.Add(new Pistol("P250", 12, 12));
+            pistols.Add(new Pistol("Five-Seven", 20, 20));
+            pistols.Add(new Pistol("DesertEagle", 7, 7));
+            pistols.Add(new Pistol("DualBarettas", 30, 30));
             #endregion
             #region CreatedSmg
             Indexer<Smg> smg = new Indexer<Smg>();
 
-            smg.Add(new Smg("MP7", 25));
-            smg.Add(new Smg("MP9", 30));
-            smg.Add(new Smg("UMP-45", 25));
-            smg.Add(new Smg("P90", 25));
-            smg.Add(new Smg("PP-Bizon", 30));
+            smg.Add(new Smg("MP7", 30, 30));
+            smg.Add(new Smg("MP9", 30, 30));
+            smg.Add(new Smg("UMP-45", 25, 25));
+            smg.Add(new Smg("P90", 50, 50));
+            smg.Add(new Smg("PP-Bizon", 38, 38));
             #endregion
             #region CreatedSniper
             Indexer<Sniper> sniper = new Indexer<Sniper>();
 
-            sniper.Add(new Sniper("AWP", 25));
-            sniper.Add(new Sniper("SSG 08", 30));
-            sniper.Add(new Sniper("SCAR-20", 25));
+            sniper.Add(new Sniper("AWP", 5, 5));
+            sniper.Add(new Sniper("SSG 08", 10, 10));
+            sniper.Add(new Sniper("SCAR-20", 20, 20));
             #endregion
 
 
@@ -57,38 +57,28 @@ namespace GunSimulator
                               "Press 3 - Remove exist weapon\n" +
                               "Press 0 - Exit\n");
             Console.Write("Enter your answer: ");
-            string menuIputString = Console.ReadLine();
-            int menuInput;
-            try
+            ConsoleKeyInfo menuInput = Console.ReadKey(true);
+        RETURN:
+            switch (menuInput.Key)
             {
-                menuInput = Convert.ToInt32(menuIputString);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Invalid input!\n" +
-                                  "Please try again\n");
-                goto START;
-            }
+                case ConsoleKey.D1:
 
-            switch (menuInput)
-            {
-                case 1:
-
-                    switch (UseCreateRemove("use"))
+                    switch (UseCreateRemove("use").Key)
                     {
-                        case 1:
+                        case ConsoleKey.D1:
                             Console.Clear();
                         USE1:
                             for (int i = 0; i < assaultRifles.Length; i++)
                             {
                                 Console.WriteLine(assaultRifles[i].FullInfo());
                             }
-                            Console.WriteLine("\nPress 0 for Go Back");
-                            string usingGunInputString = Console.ReadLine();
-                            int? usingGunInput = null;
+                            Console.WriteLine("\n-Press 0 for Go Back-");
+                            Console.Write("\nSelect ID which you want to delete: ");
+                            string usingAssaultInputString = Console.ReadLine();
+                            int? usingAssaultInput = null;
                             try
                             {
-                                usingGunInput = Convert.ToInt32(usingGunInputString);
+                                usingAssaultInput = Convert.ToInt32(usingAssaultInputString);
                             }
                             catch (Exception)
                             {
@@ -96,151 +86,294 @@ namespace GunSimulator
                                                   "Please TryAgain!");
                                 goto USE1;
                             }
-                            switch (usingGunInput)
+
+                        SHOOTMODE1:
+
+                            ConsoleKeyInfo shootingModeAssault = ModeSelector(3);
+
+                            int indexDetectorAssault = 0;
+                            for (int i = 0; i < assaultRifles.Length; i++)
                             {
-                                case 1:
-                                SHOOTMODE1:
-                                    Console.WriteLine("Select shooting mode: 1 - Single Mode | 2 - Burst Mode | 3 - Auto Mode");
-                                    Console.Write("Your answer: ");
-                                    string shootingModeString = Console.ReadLine();
-                                    int? shootingMode = null;
-                                    try
-                                    {
-                                        shootingMode = Convert.ToInt32(shootingModeString);
-                                    }
-                                    catch (Exception)
-                                    {
-                                        Console.WriteLine("Invalid Input!\n" +
-                                                          "Please TryAgain!");
-                                        goto SHOOTMODE1;
-                                    }
-                                    PrintShotSection();
-                                    SHOOTMODE2:
-                                    ConsoleKeyInfo userInput = Console.ReadKey();
-                                    switch (shootingMode)
-                                    {
-                                        case 1:
-                                            switch (userInput.Key)
-                                            {
-                                                case ConsoleKey.Enter:
-                                                    assaultRifles[0].ReduceSingleAmmo();
-                                                    break;
-                                                case ConsoleKey.R:
-                                                    assaultRifles[0].Reload();
-                                                    break;
-                                                case ConsoleKey.Q:
-                                                    Console.Clear();
-                                                    goto START;
-                                            }
-                                            goto SHOOTMODE2;
-                                        case 2:
-                                            switch (userInput.Key)
-                                            {
-                                                case ConsoleKey.Enter:
-                                                    assaultRifles[0].ReduceBurstAmmo();
-                                                    break;
-                                                case ConsoleKey.R:
-                                                    assaultRifles[0].Reload();
-                                                    break;
-                                                case ConsoleKey.Q:
-                                                    Console.Clear();
-                                                    goto START;
-                                            }
-                                            goto SHOOTMODE2;
-                                        case 3:
-                                            switch (userInput.Key)
-                                            {
-                                                case ConsoleKey.Enter:
-                                                    assaultRifles[0].ReduceAutoAmmo();
-                                                    break;
-                                                case ConsoleKey.R:
-                                                    assaultRifles[0].Reload();
-                                                    break;
-                                                case ConsoleKey.Q:
-                                                    Console.Clear();
-                                                    goto START;
-                                            }
-                                            goto SHOOTMODE2;
-                                        default:
-                                            Console.WriteLine("Invalid Input!\n" +
-                                                              "Please TryAgain!");
-                                            goto SHOOTMODE1;
-                                    }
+                                if (usingAssaultInput == assaultRifles[i].Id)
+                                {
+                                    indexDetectorAssault = i;
+                                }
                             }
 
-                            break;
-                        case 2:
+                            PrintShotSection();
+
+                        SHOOTMODE2:
+                            ConsoleKeyInfo userAssaultInput = Console.ReadKey(true);
+
+                            switch (shootingModeAssault.Key)
+                            {
+                                case ConsoleKey.D1:
+
+                                    while (userAssaultInput.Key != ConsoleKey.Q)
+                                    {
+                                        if (userAssaultInput.Key == ConsoleKey.Enter)
+                                        {
+                                            assaultRifles[indexDetectorAssault].ReduceSingleAmmo();
+                                        }
+                                        else if (userAssaultInput.Key == ConsoleKey.R)
+                                        {
+                                            assaultRifles[indexDetectorAssault].Reload();
+                                        }
+                                        goto SHOOTMODE2;
+                                    }
+                                    goto START;
+                                case ConsoleKey.D2:
+
+                                    while (userAssaultInput.Key != ConsoleKey.Q)
+                                    {
+                                        if (userAssaultInput.Key == ConsoleKey.Enter)
+                                        {
+                                            assaultRifles[indexDetectorAssault].ReduceBurstAmmo();
+                                        }
+                                        else if (userAssaultInput.Key == ConsoleKey.R)
+                                        {
+                                            assaultRifles[indexDetectorAssault].Reload();
+                                        }
+                                        goto SHOOTMODE2;
+                                    }
+                                    goto START;
+                                case ConsoleKey.D3:
+
+                                    while (userAssaultInput.Key != ConsoleKey.Q)
+                                    {
+                                        if (userAssaultInput.Key == ConsoleKey.Enter)
+                                        {
+                                            assaultRifles[indexDetectorAssault].ReduceAutoAmmo();
+                                        }
+                                        else if (userAssaultInput.Key == ConsoleKey.R)
+                                        {
+                                            assaultRifles[indexDetectorAssault].Reload();
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("You can't use this keyword");
+                                        }
+                                        goto SHOOTMODE2;
+                                    }
+                                    goto START;
+                                default:
+                                    Console.WriteLine("Invalid Input!\n" +
+                                                      "Please TryAgain!");
+                                    goto SHOOTMODE1;
+                            }
+
+                        case ConsoleKey.D2:
                             Console.Clear();
+                        USE2:
                             for (int i = 0; i < pistols.Length; i++)
                             {
                                 Console.WriteLine(pistols[i].FullInfo());
                             }
-                            Console.WriteLine("\nPress 0 for Go Back");
-                            break;
-                        case 3:
+                            Console.WriteLine("\n-Press 0 for Go Back-");
+                            Console.Write("\nSelect ID which you want to delete: ");
+                            string usingPistolInputString = Console.ReadLine();
+                            int? usingPistolInput = null;
+                            try
+                            {
+                                usingPistolInput = Convert.ToInt32(usingPistolInputString);
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Invalid Input!\n" +
+                                                  "Please TryAgain!");
+                                goto USE2;
+                            }
+
+                        SHOOTMODE3:
+                            ConsoleKeyInfo shootingModePistol = ModeSelector(2);
+
+                            int indexDetectorPistol = 0;
+                            for (int i = 0; i < pistols.Length; i++)
+                            {
+                                if (usingPistolInput == pistols[i].Id)
+                                {
+                                    indexDetectorPistol = i;
+                                }
+                            }
+
+                            PrintShotSection();
+
+                        SHOOTMODE4:
+                            ConsoleKeyInfo userPistolInput = Console.ReadKey(true);
+
+                            switch (shootingModePistol.Key)
+                            {
+                                case ConsoleKey.D1:
+
+                                    while (userPistolInput.Key != ConsoleKey.Q)
+                                    {
+                                        if (userPistolInput.Key == ConsoleKey.Enter)
+                                        {
+                                            pistols[indexDetectorPistol].ReduceSingleAmmo();
+                                        }
+                                        else if (userPistolInput.Key == ConsoleKey.R)
+                                        {
+                                            pistols[indexDetectorPistol].Reload();
+                                        }
+                                        goto SHOOTMODE4;
+                                    }
+                                    goto START;
+                                case ConsoleKey.D2:
+
+                                    while (userPistolInput.Key != ConsoleKey.Q)
+                                    {
+                                        if (userPistolInput.Key == ConsoleKey.Enter)
+                                        {
+                                            pistols[indexDetectorPistol].ReduceBurstAmmo();
+                                        }
+                                        else if (userPistolInput.Key == ConsoleKey.R)
+                                        {
+                                            pistols[indexDetectorPistol].Reload();
+                                        }
+                                        goto SHOOTMODE4;
+                                    }
+                                    goto START;
+                                default:
+                                    Console.WriteLine("Invalid Input!\n" +
+                                                      "Please TryAgain!");
+                                    goto SHOOTMODE3;
+                            }
+                        case ConsoleKey.D3:
                             Console.Clear();
                             for (int i = 0; i < smg.Length; i++)
                             {
                                 Console.WriteLine(smg[i].FullInfo());
                             }
-                            Console.WriteLine("\nPress 0 for Go Back");
-                            break;
-                        case 4:
+                            Console.WriteLine("\n-Press 0 for Go Back-");
+                            Console.Write("\nSelect ID which you want to delete: ");
+                            string usingSmgInputString = Console.ReadLine();
+                            int? usingSmgInput = null;
+                            try
+                            {
+                                usingSmgInput = Convert.ToInt32(usingSmgInputString);
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Invalid Input!\n" +
+                                                  "Please TryAgain!");
+                                goto USE2;
+                            }
+
+                        SHOOTMODE5:
+                            ConsoleKeyInfo shootingModeSmg = ModeSelector(1);
+
+                            int indexDetectorSmg = 0;
+                            for (int i = 0; i < smg.Length; i++)
+                            {
+                                if (usingSmgInput == smg[i].Id)
+                                {
+                                    indexDetectorSmg = i;
+                                }
+                            }
+
+                            PrintShotSection();
+
+                        SHOOTMODE6:
+                            ConsoleKeyInfo userSmgInput = Console.ReadKey(true);
+
+                            switch (shootingModeSmg.Key)
+                            {
+                                case ConsoleKey.D1:
+
+                                    while (userSmgInput.Key != ConsoleKey.Q)
+                                    {
+                                        if (userSmgInput.Key == ConsoleKey.Enter)
+                                        {
+                                            smg[indexDetectorSmg].ReduceSingleAmmo();
+                                        }
+                                        else if (userSmgInput.Key == ConsoleKey.R)
+                                        {
+                                            smg[indexDetectorSmg].Reload();
+                                        }
+                                        goto SHOOTMODE6;
+                                    }
+                                    goto START;
+                                case ConsoleKey.D2:
+
+                                    while (userSmgInput.Key != ConsoleKey.Q)
+                                    {
+                                        if (userSmgInput.Key == ConsoleKey.Enter)
+                                        {
+                                            smg[indexDetectorSmg].ReduceAutoAmmo();
+                                        }
+                                        else if (userSmgInput.Key == ConsoleKey.R)
+                                        {
+                                            smg[indexDetectorSmg].Reload();
+                                        }
+                                        goto SHOOTMODE6;
+                                    }
+                                    goto START;
+                                default:
+                                    Console.WriteLine("Invalid Input!\n" +
+                                                      "Please TryAgain!");
+                                    goto SHOOTMODE5;
+                            }
+                        case ConsoleKey.D4:
                             Console.Clear();
                             for (int i = 0; i < sniper.Length; i++)
                             {
                                 Console.WriteLine(sniper[i].FullInfo());
                             }
-                            Console.WriteLine("\nPress 0 for Go Back");
+                            Console.WriteLine("\n-Press 0 for Go Back-");
+                            Console.Write("\nSelect ID which you want to delete: ");
                             break;
-                        case 0:
+                        case ConsoleKey.D0:
                             Console.Clear();
                             goto START;
                     }
                     break;
-                case 2:
-                    switch (UseCreateRemove("create"))
+                case ConsoleKey.D2:
+                    switch (UseCreateRemove("create").Key)
                     {
-                        case 1:
+                        case ConsoleKey.D1:
                             string assaultName = GunsNameCreatedByUser();
                             int assaultCapacity = GunsCapacityCreatedByUser();
 
-                            assaultRifles.Add(new AssaultRifle(assaultName, assaultCapacity));
+                            assaultRifles.Add(new AssaultRifle(assaultName, assaultCapacity, assaultCapacity));
+                            Console.WriteLine("\n-Gun Created!-\n");
                             goto START;
-                        case 2:
+                        case ConsoleKey.D2:
                             string pistolName = GunsNameCreatedByUser();
                             int pistolCapacity = GunsCapacityCreatedByUser();
 
-                            pistols.Add(new Pistol(pistolName, pistolCapacity));
+                            pistols.Add(new Pistol(pistolName, pistolCapacity, pistolCapacity));
+                            Console.WriteLine("\n-Gun Created!-\n");
                             goto START;
-                        case 3:
+                        case ConsoleKey.D3:
                             string smgName = GunsNameCreatedByUser();
                             int smgCapacity = GunsCapacityCreatedByUser();
 
-                            smg.Add(new Smg(smgName, smgCapacity));
+                            smg.Add(new Smg(smgName, smgCapacity, smgCapacity));
+                            Console.WriteLine("\n-Gun Created!-\n");
                             goto START;
-                        case 4:
+                        case ConsoleKey.D4:
                             string sniperName = GunsNameCreatedByUser();
                             int sniperCapacity = GunsCapacityCreatedByUser();
 
-                            sniper.Add(new Sniper(sniperName, sniperCapacity));
+                            sniper.Add(new Sniper(sniperName, sniperCapacity, sniperCapacity));
+                            Console.WriteLine("\n-Gun Created!-\n");
                             goto START;
-                        case 0:
+                        case ConsoleKey.D0:
                             Console.Clear();
                             goto START;
                     }
                     break;
-                case 3:
-                    switch (UseCreateRemove("remove"))
+                case ConsoleKey.D3:
+                    switch (UseCreateRemove("remove").Key)
                     {
-                        case 1:
+                        case ConsoleKey.D1:
                         Remove1:
                             Console.Clear();
                             for (int i = 0; i < assaultRifles.Length; i++)
                             {
                                 Console.WriteLine(assaultRifles[i].FullInfo());
                             }
-                            Console.WriteLine("\nPress 0 for Go Back");
+                            Console.WriteLine("\n-Press 0 for Go Back-");
                             Console.Write("\nSelect ID which you want to delete: ");
                             string assaultRemoveIdString = Console.ReadLine();
                             int? assaultRemoveId = null;
@@ -267,9 +400,10 @@ namespace GunSimulator
                                 assaultLoopCount++;
 
                             }
-                            if (assaultRemoveId == 0)
+                            if (assaultRemoveId is 0)
                             {
-                                goto START;
+                                Console.Clear();
+                                goto RETURN;
                             }
                             else
                             {
@@ -277,14 +411,14 @@ namespace GunSimulator
                                                   "Please try again!");
                                 goto Remove1;
                             }
-                        case 2:
+                        case ConsoleKey.D2:
                             Console.Clear();
                         Remove2:
                             for (int i = 0; i < pistols.Length; i++)
                             {
                                 Console.WriteLine(pistols[i].FullInfo());
                             }
-                            Console.WriteLine("\nPress 0 for Go Back");
+                            Console.WriteLine("\n-Press 0 for Go Back-");
                             Console.Write("\nSelect ID which you want to delete: ");
                             string pistolRemoveIdString = Console.ReadLine();
                             int? pistolRemoveId = null;
@@ -310,9 +444,10 @@ namespace GunSimulator
                                 pistolLoopCount++;
 
                             }
-                            if (pistolRemoveId == 0)
+                            if (pistolRemoveId is 0)
                             {
-                                goto START;
+                                Console.Clear();
+                                goto RETURN;
                             }
                             else
                             {
@@ -321,14 +456,14 @@ namespace GunSimulator
                                 goto Remove2;
                             }
 
-                        case 3:
+                        case ConsoleKey.D3:
                             Console.Clear();
                         Remove3:
                             for (int i = 0; i < smg.Length; i++)
                             {
                                 Console.WriteLine(smg[i].FullInfo());
                             }
-                            Console.WriteLine("\nPress 0 for Go Back");
+                            Console.WriteLine("\n-Press 0 for Go Back-");
                             Console.Write("\nSelect ID which you want to delete: ");
                             string smgRemoveIdString = Console.ReadLine();
                             int? smgRemoveId = null;
@@ -354,9 +489,10 @@ namespace GunSimulator
                                 }
                                 smgLoopCount++;
                             }
-                            if (smgRemoveId == 0)
+                            if (smgRemoveId is 0)
                             {
-                                goto START;
+                                Console.Clear();
+                                goto RETURN;
                             }
                             else
                             {
@@ -364,14 +500,14 @@ namespace GunSimulator
                                                   "Please try again!");
                                 goto Remove3;
                             }
-                        case 4:
+                        case ConsoleKey.D4:
                             Console.Clear();
                         Remove4:
                             for (int i = 0; i < sniper.Length; i++)
                             {
                                 Console.WriteLine(sniper[i].FullInfo());
                             }
-                            Console.WriteLine("\nPress 0 for Go Back");
+                            Console.WriteLine("\n-Press 0 for Go Back-");
                             Console.Write("\nSelect ID which you want to delete: ");
                             string sniperRemoveIdString = Console.ReadLine();
                             int? sniperRemoveId = null;
@@ -398,7 +534,8 @@ namespace GunSimulator
                             }
                             if (sniperRemoveId is 0)
                             {
-                                goto START;
+                                Console.Clear();
+                                goto RETURN;
                             }
                             else
                             {
@@ -406,14 +543,14 @@ namespace GunSimulator
                                                   "Please try again!");
                                 goto Remove4;
                             }
-                        case 0:
+                        case ConsoleKey.D0:
                             Console.Clear();
                             goto START;
                         default:
                             break;
                     }
                     break;
-                case 0:
+                case ConsoleKey.D0:
                     Console.Clear();
                 ERROR3:
                     Console.Write("Are you sure you want to exit?: 'yes' or 'no': ");
@@ -475,26 +612,13 @@ namespace GunSimulator
         /// </summary>
         /// <param name="output">Enter what you want to do(create, use, remove)</param>
         /// <returns></returns>
-        public static int UseCreateRemove(string output)
+        public static ConsoleKeyInfo UseCreateRemove(string output)
         {
             Console.Clear();
-        ERROR1:
             Console.WriteLine($"Which type gun will you {output}?");
             PrintGunTypes();
-            string inputString = Console.ReadLine();
-            int input;
-            try
-            {
-                input = Convert.ToInt32(inputString);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Invalid Input!\n" +
-                                  "Please Try Again!\n");
-                goto ERROR1;
-            }
 
-            return input;
+            return Console.ReadKey();
         }
 
         /// <summary>
@@ -548,8 +672,8 @@ namespace GunSimulator
           /           /  ___)
          /    \       \    _)                       )
         \      \           /                       (
-      \/ \      \_________/   |\_________________,_ )        =>
-       \/ \      /            |     ==== _______)__)    =>      =>
+      \/ \      \_________/   |\_________________,_ )
+       \/ \      /            |     ==== _______)__)
         \/ \    /           __/___  ====_/
          \/ \  /           (O____)\\_(_/
                           (O_ ____)
@@ -557,6 +681,28 @@ namespace GunSimulator
             Console.WriteLine("\n-Press Enter for Shooting-\n" +
                               "-Press R for Reload\n" +
                               "-Press Q for Go back to Main Menu-");
+        }
+
+        public static ConsoleKeyInfo ModeSelector(int value)
+        {
+            if (value == 3)
+            {
+                Console.WriteLine("Select shooting mode: 1 - Single Mode | 2 - Burst Mode | 3 - Auto Mode");
+                Console.Write("Your answer: ");
+            }
+            else if (value == 2)
+            {
+                Console.WriteLine("Select shooting mode: 1 - Single Mode | 2 - Burst Mode");
+                Console.Write("Your answer: ");
+            }
+            else if (value == 1)
+            {
+                Console.WriteLine("Select shooting mode: 1 - Single Mode | 2 - Auto Mode");
+                Console.Write("Your answer: ");
+            }
+
+
+            return Console.ReadKey(true);
         }
 
     }

@@ -10,7 +10,7 @@ namespace GunSimulator.Models
     public class AssaultRifle : Guns, ISingleShot, IBurstShot, IAutoShot
     {
 
-        public AssaultRifle(string name, int capacity) : base(name, capacity)
+        public AssaultRifle(string name, int capacity, int currentBullet) : base(name, capacity, currentBullet)
         {
 
         }
@@ -20,7 +20,8 @@ namespace GunSimulator.Models
             if (CurrentBulletCount > 0)
             {
                 CurrentBulletCount = 0;
-                Console.WriteLine($"Ammo Count: {CurrentBulletCount}/{Capacity}");
+                PrintAutoShooter();
+                Console.WriteLine($"\nYour Gun: {Name} Ammo Count: {CurrentBulletCount}/{Capacity}");
             }
             else
             {
@@ -33,7 +34,8 @@ namespace GunSimulator.Models
             if (CurrentBulletCount - 3 > 0)
             {
                 CurrentBulletCount -= 3;
-                Console.WriteLine($"Ammo Count: {CurrentBulletCount}/{Capacity}");
+                PrintBurstShooter();
+                Console.WriteLine($"\nYour Gun: {Name} Ammo Count: {CurrentBulletCount}/{Capacity}");
             }
             else
             {
@@ -46,7 +48,8 @@ namespace GunSimulator.Models
             if (CurrentBulletCount > 0)
             {
                 CurrentBulletCount -= 1;
-                Console.WriteLine($"Ammo Count: {CurrentBulletCount}/{Capacity}");
+                PrintSingleShooter();
+                Console.WriteLine($"\nYour Gun: {Name} Ammo Count: {CurrentBulletCount}/{Capacity}");
             }
             else
             {

@@ -9,7 +9,7 @@ namespace GunSimulator.Models
 {
     public class Smg : Guns, ISingleShot, IAutoShot
     {
-        public Smg(string name, int capacity) : base(name, capacity)
+        public Smg(string name, int capacity, int currentBullet) : base(name, capacity, currentBullet)
         {
         }
 
@@ -18,7 +18,7 @@ namespace GunSimulator.Models
             if (CurrentBulletCount > 0)
             {
                 CurrentBulletCount = 0;
-                Console.WriteLine($"Ammo Count: {CurrentBulletCount}/{Capacity}");
+                Console.WriteLine($"\nYour Gun: {Name} Ammo Count: {CurrentBulletCount}/{Capacity}");
             }
             else
             {
@@ -31,7 +31,7 @@ namespace GunSimulator.Models
             if (CurrentBulletCount > 0)
             {
                 CurrentBulletCount -= 1;
-                Console.WriteLine($"Ammo Count: {CurrentBulletCount}/{Capacity}");
+                Console.WriteLine($"\nYour Gun: {Name} Ammo Count: {CurrentBulletCount}/{Capacity}");
             }
             else
             {

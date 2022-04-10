@@ -9,7 +9,7 @@ namespace GunSimulator.Models
 {
     public class Sniper : Guns, ISingleShot
     {
-        public Sniper(string name, int capacity) : base(name, capacity)
+        public Sniper(string name, int capacity, int currentBullet) : base(name, capacity, currentBullet)
         {
         }
 
@@ -18,7 +18,7 @@ namespace GunSimulator.Models
             if (CurrentBulletCount > 0)
             {
                 CurrentBulletCount -= 1;
-                Console.WriteLine($"Ammo Count: {CurrentBulletCount}/{Capacity}");
+                Console.WriteLine($"\nYour Gun: {Name} Ammo Count: {CurrentBulletCount}/{Capacity}");
             }
             else
             {
