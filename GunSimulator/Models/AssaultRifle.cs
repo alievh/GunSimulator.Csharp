@@ -15,6 +15,9 @@ namespace GunSimulator.Models
 
         }
 
+        /// <summary>
+        /// Reducing all ammo in one shot
+        /// </summary>
         public void ReduceAutoAmmo()
         {
             if (CurrentBulletCount > 0)
@@ -31,6 +34,9 @@ namespace GunSimulator.Models
             }
         }
 
+        /// <summary>
+        /// Reducing Ammo 3 time in one shot
+        /// </summary>
         public void ReduceBurstAmmo()
         {
             if (CurrentBulletCount - 3 >= 0)
@@ -47,6 +53,9 @@ namespace GunSimulator.Models
             }
         }
 
+        /// <summary>
+        /// Reducing Ammo count one by one
+        /// </summary>
         public void ReduceSingleAmmo()
         {
             if (CurrentBulletCount > 0)

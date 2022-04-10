@@ -13,6 +13,9 @@ namespace GunSimulator.Models
         {
         }
 
+        /// <summary>
+        /// Reducing Ammo count one by one
+        /// </summary>
         public void ReduceSingleAmmo()
         {
             if (CurrentBulletCount > 0)

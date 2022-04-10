@@ -51,7 +51,7 @@ namespace GunSimulator.Models
 
         public override string Info()
         {
-            return $"Id: {Id} - Name: {Name}";
+            return $"Id: {Id} - Name: {Name}, Capacity: {Capacity}";
         }
 
         public override string FullInfo()
@@ -59,6 +59,9 @@ namespace GunSimulator.Models
             return $"Id: {Id} - Name: {Name}, Ammo Capacity: {Capacity}, CreateTime: {CreateTime}";
         }
 
+        /// <summary>
+        /// Reloading ammo
+        /// </summary>
         public void Reload()
         {
             Console.ForegroundColor = ConsoleColor.Green;

@@ -51,7 +51,6 @@ namespace Indexer.IndexerFolder
 
         }
 
-
         /// <summary>
         /// Using for remove any value
         /// </summary>
@@ -91,7 +90,7 @@ namespace Indexer.IndexerFolder
         public T[] Resize(T[] array, int newSize)
         {
             T[] newArray = new T[newSize];
-            int counter = 0;
+            int counter;
 
             counter = newSize > array.Length ? array.Length : newSize;
 
