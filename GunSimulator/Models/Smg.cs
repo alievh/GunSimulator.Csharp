@@ -11,6 +11,7 @@ namespace GunSimulator.Models
     {
         public Smg(string name, int capacity, int currentBullet) : base(name, capacity, currentBullet)
         {
+            SmgRifles.Add(this);
         }
 
         /// <summary>

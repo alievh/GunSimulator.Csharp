@@ -11,6 +11,7 @@ namespace GunSimulator.Models
     {
         public Pistol(string name, int capacity, int currentBullet) : base(name, capacity, currentBullet)
         {
+            Pistols.Add(this);
         }
 
         /// <summary>

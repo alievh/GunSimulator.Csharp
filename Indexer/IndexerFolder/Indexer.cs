@@ -9,7 +9,6 @@ namespace Indexer.IndexerFolder
     public class Indexer<T>
     {
         private T[] _array;
-        private static int _idCounter;
 
         public T this[int index]
         {
@@ -23,19 +22,11 @@ namespace Indexer.IndexerFolder
             }
         }
 
-        public int Id { get; set; }
-
         public int Length { get => _array.Length; }
-
-        static Indexer()
-        {
-            _idCounter = 0;
-        }
 
         public Indexer()
         {
             _array = new T[0];
-            Id = ++_idCounter;
         }
 
         /// <summary>

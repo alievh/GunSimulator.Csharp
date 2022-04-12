@@ -8,10 +8,13 @@ namespace Exceptions.ExceptionsFolder
 {
     public class NotAcceptableInput : Exception
     {
-        public NotAcceptableInput(string message)
+        public NotAcceptableInput(string message) : base(message)
         {
-            Console.WriteLine("Invalid Input!\n" +
-                              "Please TryAgain!");
+            
+        }
+        public static void Show(string message)
+        {
+            Console.WriteLine("Please enter only number!");
         }
     }
 }

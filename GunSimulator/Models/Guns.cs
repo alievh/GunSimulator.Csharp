@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Indexer.IndexerFolder;
+using Exceptions.ExceptionsFolder;
 
 namespace GunSimulator.Models
 {
-    public class Guns : Base
+    public abstract class Guns : Base
     {
+        public static Indexer<AssaultRifle> AssaultRifles { get; protected set; }
+        public static Indexer<Pistol> Pistols { get; protected set; }
+        public static Indexer<Smg> SmgRifles { get; protected set; }
+        public static Indexer<Sniper> SniperRifles { get; protected set; }
+
         private int _capacity;
         private int _currentBulletCount;
 
@@ -21,11 +28,20 @@ namespace GunSimulator.Models
             {
                 if (value <= 0 && value >= 200)
                 {
-                    throw new IndexOutOfRangeException();
+                    throw new NotAcceptableInput("You entered not a number! Please enter number!");
                 }
                 _capacity = value;
             }
         }
+
+        static Guns()
+        {
+            AssaultRifles = new Indexer<AssaultRifle>();
+            Pistols = new Indexer<Pistol>();
+            SmgRifles = new Indexer<Smg>();
+            SniperRifles = new Indexer<Sniper>();
+        }
+
         public int CurrentBulletCount 
         {
             get
@@ -38,7 +54,7 @@ namespace GunSimulator.Models
             }
         }
 
-        public Guns()
+        private Guns()
         {
 
         }
@@ -48,6 +64,8 @@ namespace GunSimulator.Models
             Capacity = capacity;
             CurrentBulletCount = currentBullet;
         }
+
+        
 
         public override string Info()
         {
@@ -72,6 +90,8 @@ namespace GunSimulator.Models
         public static void PrintSingleShooter()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Press 'Q' for back to <Main Menu>\n");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(@"            ||||||||||||||
            =              \       ,
@@ -95,6 +115,8 @@ namespace GunSimulator.Models
         public static void PrintBurstShooter()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Press 'Q' for back to <Main Menu>\n");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(@"            ||||||||||||||
            =              \       ,
@@ -118,6 +140,8 @@ namespace GunSimulator.Models
         public static void PrintAutoShooter()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Press 'Q' for back to <Main Menu>\n");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(@"            ||||||||||||||
            =              \       ,

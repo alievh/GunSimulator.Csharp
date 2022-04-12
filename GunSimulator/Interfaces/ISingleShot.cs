@@ -8,6 +8,6 @@ namespace GunSimulator.Interfaces
 {
     public interface ISingleShot
     {
-        public void ReduceSingleAmmo();
+        public abstract void ReduceSingleAmmo();
     }
 }

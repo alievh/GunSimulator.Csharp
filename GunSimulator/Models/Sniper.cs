@@ -11,6 +11,7 @@ namespace GunSimulator.Models
     {
         public Sniper(string name, int capacity, int currentBullet) : base(name, capacity, currentBullet)
         {
+            SniperRifles.Add(this);
         }
 
         /// <summary>

@@ -9,10 +9,9 @@ namespace GunSimulator.Models
 {
     public class AssaultRifle : Guns, ISingleShot, IBurstShot, IAutoShot
     {
-
         public AssaultRifle(string name, int capacity, int currentBullet) : base(name, capacity, currentBullet)
         {
-
+            AssaultRifles.Add(this);
         }
 
         /// <summary>
@@ -71,5 +70,6 @@ namespace GunSimulator.Models
                 Console.WriteLine("<= You don't have enough ammo press 'R' for reload =>");
             }
         }
+
     }
 }
